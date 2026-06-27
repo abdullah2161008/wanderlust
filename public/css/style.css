@@ -1,0 +1,579 @@
+/* ───── RESET & BASE ───── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --coral: #FF385C;
+    --coral-dark: #d9304f;
+    --dark: #222222;
+    --mid: #717171;
+    --light: #f7f7f7;
+    --white: #ffffff;
+    --border: #dddddd;
+    --shadow: 0 2px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+/* ───── HEADER ───── */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+}
+
+.nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+}
+
+.nav-logo .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--coral);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo .logo-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+.nav-logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--coral);
+    letter-spacing: -0.5px;
+}
+
+.nav-search {
+    flex: 1;
+    max-width: 380px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    gap: 0.5rem;
+    transition: box-shadow 0.2s;
+}
+
+.nav-search:focus-within {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.nav-search input {
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    flex: 1;
+    color: var(--dark);
+    background: transparent;
+}
+
+.nav-search input::placeholder {
+    color: var(--mid);
+}
+
+.search-btn {
+    background: var(--coral);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.search-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: white;
+    fill: none;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    background: var(--light);
+}
+
+.nav-link.primary {
+    background: var(--coral);
+    color: white;
+}
+
+.nav-link.primary:hover {
+    background: var(--coral-dark);
+}
+
+/* ───── MAIN ───── */
+main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 2rem;
+}
+
+/* ───── LISTINGS HEADER ───── */
+.listings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.listings-header h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* ───── LISTINGS GRID (index page) ───── */
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.listing-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--white);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.listing-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.listing-card-body {
+    padding: 0.8rem 0.2rem;
+}
+
+.listing-card-body h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listing-card-body p {
+    font-size: 0.85rem;
+    color: var(--mid);
+    margin-bottom: 0.3rem;
+}
+
+.listing-card-body .price {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.listing-card-body .price span {
+    font-weight: 400;
+    color: var(--mid);
+    font-size: 0.85rem;
+}
+
+.listing-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.card-actions form {
+    margin: 0;
+}
+
+/* ───── SHOW PAGE ───── */
+.listing-show {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.listing-show img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+}
+
+.listing-show-body {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+}
+
+.listing-show h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.listing-show .listing-meta {
+    color: var(--mid);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.listing-show .listing-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--coral);
+    margin-bottom: 1.2rem;
+}
+
+.listing-show .listing-price span {
+    font-weight: 400;
+    color: var(--mid);
+    font-size: 0.9rem;
+}
+
+.listing-show .listing-description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--mid);
+    margin-bottom: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+}
+
+.listing-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+}
+
+.listing-actions form {
+    margin: 0;
+}
+
+/* ───── BUTTONS ───── */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background: var(--coral);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--coral-dark);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--dark);
+    border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+    background: var(--light);
+}
+
+.btn-danger {
+    background: transparent;
+    color: var(--coral);
+    border: 1px solid var(--coral);
+}
+
+.btn-danger:hover {
+    background: var(--coral);
+    color: white;
+}
+
+/* ───── FORMS (new & edit pages) ───── */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.form-container h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: var(--dark);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--dark);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+}
+
+/* ───── IMAGE PREVIEW ───── */
+.image-preview-box {
+    width: 100%;
+    height: 220px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--light);
+}
+
+.image-preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+
+@media (max-width: 500px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ───── FOOTER ───── */
+footer {
+    background: var(--light);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem 1.5rem;
+    margin-top: auto;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-col h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    margin-bottom: 0.8rem;
+}
+
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: var(--mid);
+    font-size: 0.88rem;
+    transition: color 0.15s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--dark);
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    color: var(--mid);
+}
+
+.footer-bottom p span {
+    color: var(--coral);
+    font-weight: 600;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-socials a {
+    color: var(--mid);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.footer-socials a:hover {
+    color: var(--coral);
+}
+
+/* ───── RESPONSIVE ───── */
+@media (max-width: 768px) {
+    .listings-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    .listing-show img {
+        height: 280px;
+    }
+}
+
+@media (max-width: 640px) {
+    .nav-search { display: none; }
+    .nav-logo span { font-size: 1.2rem; }
+    main { padding: 1rem; }
+
+    .listings-grid {
+        grid-template-columns: 1fr;
+    }
+}

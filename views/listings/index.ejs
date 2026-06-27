@@ -1,24 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
-<body>
-    <h3>All listings</h3>
-    <button><a href="/listings/new">Create new Listing</a></button>
-    <ul>
-        <% for(let listing of  allListings){ %>
-            <li><a href="/listings/<%= listing._id %>"><%= listing.title %></a> <button>
-                <a href="/listings/<%= listing._id %>/edit">Edit</a></button> 
-                <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
-                    <button>Delete</button>
-                </form>
-            </li>
-            
-        <% } %>
-    </ul>
-</body>
-</html>
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="listings-header">
+    <h2>Explore Listings</h2>
+    <a href="/listings/new" class="btn btn-primary">+ Add Listing</a>
+</div>
+
+<div class="listings-grid">
+    <% for(let listing of allListings){ %>
+        <div class="listing-card">
+            <a href="/listings/<%= listing._id %>">
+                <img src="<%= listing.image %>" alt="<%= listing.title %>" />
+            </a>
+            <div class="listing-card-body">
+                <h3><%= listing.title %></h3>
+                <p><%= listing.location %>, <%= listing.country %></p>
+                <div class="listing-card-footer">
+                    <span class="price"><%= listing.price %> Rs <span>/ night</span></span>
+                    <div class="card-actions">
+                        <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline">Edit</a>
+                        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+
 
