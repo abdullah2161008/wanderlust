@@ -1,12 +1,38 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
+<div class="flash-container">
+    <% if (success && success.length > 0) { %>
+        <div class="flash-msg flash-success">
+            <span class="flash-icon">✓</span>
+            <%= success %>
+            <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+    <% } %>
+
+    <% if (listingDel && listingDel.length > 0) { %>
+        <div class="flash-msg flash-delete">
+            <span class="flash-icon">🗑</span>
+            <%= listingDel %>
+            <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+    <% } %>
+
+    <% if (listingEdit && listingEdit.length > 0) { %>
+        <div class="flash-msg flash-edit">
+            <span class="flash-icon">✎</span>
+            <%= listingEdit %>
+            <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+    <% } %>
+</div>
+
 <div class="listings-header">
     <h2>Explore Listings</h2>
     <a href="/listings/new" class="btn btn-primary">+ Add Listing</a>
 </div>
 
 <div class="listings-grid">
-    <% for(let listing of allListings){ %>
+    <% for (let listing of allListings) { %>
         <div class="listing-card">
             <a href="/listings/<%= listing._id %>">
                 <img src="<%= listing.image %>" alt="<%= listing.title %>" />
@@ -15,9 +41,13 @@
                 <h3><%= listing.title %></h3>
                 <p><%= listing.location %>, <%= listing.country %></p>
                 <div class="listing-card-footer">
-                    <span class="price"><%= listing.price %> Rs <span>/ night</span></span>
+                    <span class="price">
+                        <%= listing.price %> Rs <span>/ night</span>
+                    </span>
                     <div class="card-actions">
-                        <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline">Edit</a>
+                        <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline">
+                            Edit
+                        </a>
                         <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
                             <button class="btn btn-danger">Delete</button>
                         </form>
@@ -27,6 +57,3 @@
         </div>
     <% } %>
 </div>
-
-
-

@@ -22,5 +22,87 @@
             <a href="/listings" class="btn btn-outline">← Back to Listings</a>
         </div>
     </div>
-
 </div>
+
+
+
+<section class="review-section">
+
+  <!-- Review form — reuses the site's existing .form-container / .form-group system -->
+  <div class="form-container review-form-container">
+    <h2>Leave a Review</h2>
+
+    <form method="post" action="/listings/<%= listing._id %>/reviews">
+
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <div class="rating-control">
+          <input
+            type="range"
+            name="rating"
+            id="rating"
+            min="1"
+            max="5"
+            value="5"
+            oninput="document.getElementById('ratingWord').textContent = ['','Poor','Fair','Good','Great','Excellent'][this.value]; document.getElementById('ratingNum').textContent = this.value;"
+          >
+          <span class="rating-readout">
+            <span id="ratingNum">5</span>/5 &middot; <span id="ratingWord">Excellent</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="comment">Make a Comment</label>
+        <input id="comment" type="text" name="comment" placeholder="What stood out about your stay?">
+      </div>
+
+      <div class="form-btns">
+        <button type="submit" class="btn-primary">Add Review</button>
+      </div>
+    </form>
+  </div>
+  
+  
+  <% if (revSuccess && revSuccess.length > 0) { %>
+    <div class="flash-msg flash-rev-success">
+        <span class="flash-icon">✓</span>
+        <%= revSuccess %>
+        <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+    </div>
+<% } %>
+
+<% if (revDel && revDel.length > 0) { %>
+    <div class="flash-msg flash-rev-del">
+        <span class="flash-icon">🗑</span>
+        <%= revDel %>
+        <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+    </div>
+<% } %>
+
+
+  <!-- Review list — styled to match listing cards (rounded, bordered, shadowed) -->
+  <div class="review-list">
+    <h3 class="review-list-title">Guest Reviews</h3>
+
+    <% listing.reviews.forEach(review => { %>
+      <div class="review-card">
+        <div class="review-badge"><%= review.rating %></div>
+        <div class="review-body">
+          <p class="review-comment"><%= review.comment %></p>
+          <p class="review-date">
+            <%= review.created_at.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+          </p>
+        </div>
+        <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="review-delete-form">
+          <button type="submit" class="delete-btn" aria-label="Delete review">&times;</button>
+        </form>
+      </div>
+    <% }) %>
+
+    <% if (listing.reviews.length === 0) { %>
+      <p class="empty-state">No reviews yet — be the first to share your experience.</p>
+    <% } %>
+  </div>
+
+</section>

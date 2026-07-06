@@ -577,3 +577,432 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+
+.review-section {
+    max-width: 600px;
+    margin: 2.5rem auto;
+}
+
+.review-form-container {
+    margin-bottom: 2.5rem;
+}
+
+/* Reuses .form-container / .form-group / label / input styles already
+   defined on the site — only new pieces below are the rating control,
+   the primary button, and the review list/cards. */
+
+/* ───── Rating slider ───── */
+
+.rating-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-control input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--border);
+    outline: none;
+}
+
+.rating-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--coral);
+    border: 3px solid var(--white);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+.rating-control input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--coral);
+    border: 3px solid var(--white);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+.rating-readout {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--dark);
+    white-space: nowrap;
+    min-width: 100px;
+    text-align: right;
+}
+
+.rating-readout #ratingNum {
+    color: var(--coral);
+    font-weight: 700;
+}
+
+/* ───── Primary button (matches coral accent used across the site) ───── */
+
+.btn-primary {
+    background: var(--coral);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-primary:hover {
+    background: #e0334f;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:focus-visible {
+    outline: 3px solid rgba(255, 56, 92, 0.3);
+    outline-offset: 2px;
+}
+
+/* ───── Review list ───── */
+
+.review-section {
+    max-width: 600px;
+    margin: 2.5rem auto;
+}
+
+.review-form-container {
+    margin-bottom: 2.5rem;
+}
+
+/* Reuses .form-container / .form-group / label / input styles already
+   defined on the site — only new pieces below are the rating control,
+   the primary button, and the review list/cards. */
+
+/* ───── Rating slider ───── */
+
+.rating-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-control input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--border);
+    outline: none;
+}
+
+.rating-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--coral);
+    border: 3px solid var(--white);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+.rating-control input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--coral);
+    border: 3px solid var(--white);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+.rating-readout {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--dark);
+    white-space: nowrap;
+    min-width: 100px;
+    text-align: right;
+}
+
+.rating-readout #ratingNum {
+    color: var(--coral);
+    font-weight: 700;
+}
+
+/* ───── Primary button (matches coral accent used across the site) ───── */
+
+.btn-primary {
+    background: var(--coral);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-primary:hover {
+    background: #e0334f;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:focus-visible {
+    outline: 3px solid rgba(255, 56, 92, 0.3);
+    outline-offset: 2px;
+}
+
+/* ───── Review list ───── */
+
+.review-list-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.review-card {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.review-delete-form {
+    margin: 0;
+    margin-left: auto;
+}
+
+.delete-btn {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--mid);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.delete-btn:hover {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: var(--white);
+}
+
+.delete-btn:focus-visible {
+    outline: 3px solid rgba(255, 56, 92, 0.3);
+    outline-offset: 2px;
+}
+
+.review-badge {
+    flex-shrink: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--coral);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.review-body {
+    flex: 1;
+}
+
+.review-comment {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--dark);
+    margin: 0;
+}
+
+.review-date {
+    font-size: 0.78rem;
+    color: var(--mid);
+    margin-top: 0.4rem;
+}
+
+.empty-state {
+    font-size: 0.9rem;
+    color: var(--mid);
+    padding: 0.5rem 0;
+}
+
+/* ───── Responsive ───── */
+
+@media (max-width: 500px) {
+    .rating-control {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+    .rating-readout {
+        text-align: left;
+    }
+}
+
+
+
+/* ───── FLASH MESSAGES ───── */
+.flash-container {
+    max-width: 1200px;
+    margin: 1rem auto 0;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.flash-msg {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: var(--radius);
+    font-size: 0.92rem;
+    font-weight: 500;
+    box-shadow: var(--shadow);
+    animation: flashSlideIn 0.3s ease-out;
+    position: relative;
+}
+
+.flash-msg .flash-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.flash-msg .flash-close {
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.6;
+    background: none;
+    border: none;
+}
+
+.flash-msg .flash-close:hover {
+    opacity: 1;
+}
+
+/* Success (registered) */
+.flash-success {
+    background: #e7f9ee;
+    color: #1a7f4e;
+    border: 1px solid #b5ecc9;
+}
+
+.flash-success .flash-icon {
+    background: #1a7f4e;
+}
+
+/* Error / Delete (listingDel) */
+.flash-error,
+.flash-delete {
+    background: #fdeceb;
+    color: var(--coral-dark);
+    border: 1px solid #f8c6c6;
+}
+
+.flash-error .flash-icon,
+.flash-delete .flash-icon {
+    background: var(--coral);
+}
+
+/* Edit (listingEdit) */
+.flash-edit {
+    background: #fff8e6;
+    color: #8a6d1a;
+    border: 1px solid #f5e2a3;
+}
+
+.flash-edit .flash-icon {
+    background: #d9a814;
+}
+
+@keyframes flashSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .flash-container {
+        padding: 0 1rem;
+    }
+    .flash-msg {
+        font-size: 0.85rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+
+
+/* Review Success (Add review) */
+.flash-rev-success {
+    background: #e7f9ee;
+    color: #1a7f4e;
+    border: 1px solid #b5ecc9;
+}
+
+.flash-rev-success .flash-icon {
+    background: #1a7f4e;
+}
+
+/* Review Delete */
+.flash-rev-del {
+    background: #fdeceb;
+    color: var(--coral-dark);
+    border: 1px solid #f8c6c6;
+}
+
+.flash-rev-del .flash-icon {
+    background: var(--coral);
+}
