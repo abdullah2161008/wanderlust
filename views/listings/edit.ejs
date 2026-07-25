@@ -2,7 +2,7 @@
 
 <div class="form-container">
     <h2>Edit Listing</h2>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+    <form enctype="multipart/form-data" method="POST" action="/listings/<%= listing._id %>?_method=PUT">
 
         <div class="form-group">
             <label for="title">Title</label>
@@ -15,15 +15,15 @@
         </div>
 
         <div class="form-group">
-            <label for="image">Image URL</label>
-            <input type="url" name="image" id="image" value="<%= listing.image %>" oninput="previewImage(this.value)">
+            <label for="image">Upload New Image (optional)</label>
+            <input type="file" name="image" id="image"  accept="image/*" onchange="previewImage(this)">
         </div>
 
         <!-- Image Preview -->
         <div class="form-group">
             <label>Image Preview</label>
             <div class="image-preview-box">
-                <img id="imagePreview" src="<%= listing.image %>" alt="Preview" onerror="this.src='https://via.placeholder.com/600x300?text=Invalid+URL'" />
+                <img id="imagePreview" src="<%= listing.image.url %>" alt="Preview" onerror="this.src='https://via.placeholder.com/600x300?text=Invalid+URL'" />
             </div>
         </div>
 

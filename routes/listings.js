@@ -1,61 +1,52 @@
 const express = require("express");
 const router = express.Router();
-
+const geocodingClient = require("../utils/mapToken.js");
 const Listing = require("../models/listing.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
-const { listingSchema } = require("../schema.js");  
+const { listingSchema } = require("../schema.js");
+const { isLoggedIn, isOwner } = require("../middleware.js");
+const listingController = require("../controllers/listings.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
+
+//here we use router.route() method
+
+router.get("/search", wrapAsync(listingController.searchRoute));
+
+router
+  .route("/")
+  .get(wrapAsync(listingController.index))
+  .post(
+    isLoggedIn,
+    upload.single("image"),
+    wrapAsync(listingController.newRoute)
+);
+
+//index route
+// router.get("/",wrapAsync(listingController.index));
+
+//new route
+router.get("/new", isLoggedIn, listingController.new);
+// router.post("/", isLoggedIn,wrapAsync(listingController.newRoute));
+// routes/listing.js
 
 
-router.get("/",wrapAsync(async (req,res)=>{
-    let allListings = await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
-}))
+router
+  .route("/:id")
+  .get(wrapAsync(listingController.show))
+  .put(isLoggedIn, isOwner,upload.single("image"), wrapAsync(listingController.editRoute))
+  .delete(isLoggedIn, isOwner, wrapAsync(listingController.delete));
 
-router.get("/new",(req,res)=>{
-    res.render("listings/newListing.ejs");
-})
+//show route
+// router.get("/:id",wrapAsync(listingController.show));
 
-router.post("/", wrapAsync(async (req, res) => {
-    console.log(req.body);
-    const {error} = listingSchema.validate(req.body);
-    if(error){
-        const message = error.details.map(el => el.message).join(", ");
-        throw new ExpressError(400,message);
-    }
-    let newListing = new Listing(req.body);
-    await newListing.save();
-    req.flash("success","New Listing Created!");
-    res.redirect("/listings");
-}));
+//edit route
+router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.edit));
 
-router.get("/:id",wrapAsync(async (req,res)=>{
-    let {id} = req.params;
-    const listing = await Listing.findById(id).populate("reviews");
-    if(!listing) throw new ExpressError(404,"Listing not found!");
-    res.render("listings/show.ejs",{listing});
-}));
+// router.put("/:id",isLoggedIn,isOwner,wrapAsync(listingController.editRoute));
 
+// router.delete("/:id",isLoggedIn,isOwner,wrapAsync(listingController.delete));
 
-router.get("/:id/edit",wrapAsync( async(req,res)=>{
-    let {id} = req.params; 
-    const listing = await Listing.findById(id);
-    res.render("listings/edit.ejs",{listing});
-}));
-
-router.put("/:id",wrapAsync(async(req,res)=>{
-    let {id} = req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body});
-    req.flash("listingEdit","Listing Edited Successfully!")
-    res.redirect("/listings")
-}));
-
-
-router.delete("/:id",wrapAsync(async(req,res)=>{
-    let {id} = req.params;
-    await Listing.findByIdAndDelete(id);
-    req.flash("listingDel","Listing Deleted Successfully!")
-    res.redirect("/listings")
-}));
-
-module.exports =  router;
+module.exports = router;

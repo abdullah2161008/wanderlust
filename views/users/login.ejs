@@ -1,0 +1,36 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<% if (error && error.length > 0) { %>
+        <div class="flash-msg flash-delete">
+            <span class="flash-icon">🗑</span>
+            <%= error %>
+            <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+<% } %>
+
+
+<div class="form-container">
+    <h2>Login on Wanderlust</h2>
+    <form class="needs-validation"  method="POST" action="/login">
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input required type="text" name="username" id="title"
+                placeholder="Enter a Username" class="form-control">
+            <!-- <div class="invalid-feedback">Please enter a username</div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input required type="password" name="password" id="title"
+                placeholder="Enter a Password" class="form-control">
+            <!-- <div class="invalid-feedback">Please enter Password</div> -->
+        </div>
+
+        <div class="form-btns">
+            <a href="/listings" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+
+    </form>
+</div>

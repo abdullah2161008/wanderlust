@@ -1,7 +1,11 @@
+const { required } = require("joi");
 const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
-    comment:String,
+    comment:{
+        type:String,
+        required:true
+    },
     rating:{
         type:Number,
         min:1,
@@ -10,6 +14,10 @@ const reviewSchema = new mongoose.Schema({
     created_at:{
         type:Date,
         default:Date.now()
+    },
+    owner:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
     }
 });
 

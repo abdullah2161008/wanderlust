@@ -1,10 +1,19 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
+
 <div class="flash-container">
     <% if (success && success.length > 0) { %>
         <div class="flash-msg flash-success">
             <span class="flash-icon">✓</span>
             <%= success %>
+            <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+    <% } %>
+
+    <% if (signUpDone && signUpDone.length > 0) { %>
+        <div class="flash-msg flash-login">
+            <span class="flash-icon">✓</span>
+            <%= signUpDone %>
             <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
         </div>
     <% } %>
@@ -16,6 +25,7 @@
             <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
         </div>
     <% } %>
+    
 
     <% if (listingEdit && listingEdit.length > 0) { %>
         <div class="flash-msg flash-edit">
@@ -35,7 +45,7 @@
     <% for (let listing of allListings) { %>
         <div class="listing-card">
             <a href="/listings/<%= listing._id %>">
-                <img src="<%= listing.image %>" alt="<%= listing.title %>" />
+                <img src="<%= listing.image.url %>" alt="<%= listing.title %>" />
             </a>
             <div class="listing-card-body">
                 <h3><%= listing.title %></h3>
@@ -44,6 +54,14 @@
                     <span class="price">
                         <%= listing.price %> Rs <span>/ night</span>
                     </span>
+
+                    <% if (typeof searchQuery !== "undefined" && searchQuery) { %>
+                        <p class="search-results-info">
+                            Showing results for "<%= searchQuery %>"
+                            <% if (allListings.length === 0) { %> — no listings found.<% } %>
+                        </p>
+                    <% } %>
+                    <% if(currentUser && listing.owner && listing.owner.equals(currentUser._id)) { %>
                     <div class="card-actions">
                         <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline">
                             Edit
@@ -52,6 +70,7 @@
                             <button class="btn btn-danger">Delete</button>
                         </form>
                     </div>
+                <% } %>
                 </div>
             </div>
         </div>

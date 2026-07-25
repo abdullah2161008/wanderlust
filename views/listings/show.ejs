@@ -1,10 +1,16 @@
 <% layout("/layouts/boilerplate.ejs") %>
+<script>
+  const mapToken = "<%= process.env.MAP_TOKEN %>";
+  const listingData = <%- JSON.stringify(listing) %>;
+</script>
+
 
 <div class="listing-show">
 
-    <img src="<%= listing.image %>" alt="<%= listing.title %>" />
+    <img src="<%= listing.image.url %>" alt="<%= listing.title %>" />
 
     <div class="listing-show-body">
+        <i>@<%= listing.owner.username %></i>
         <h1><%= listing.title %></h1>
         <p class="listing-meta"><%= listing.location %>, <%= listing.country %></p>
 
@@ -54,7 +60,7 @@
 
       <div class="form-group">
         <label for="comment">Make a Comment</label>
-        <input id="comment" type="text" name="comment" placeholder="What stood out about your stay?">
+        <input required id="comment" type="text" name="comment" placeholder="What stood out about your stay?">
       </div>
 
       <div class="form-btns">
@@ -89,20 +95,35 @@
       <div class="review-card">
         <div class="review-badge"><%= review.rating %></div>
         <div class="review-body">
+          <p class="review-username">
+            <%= review.owner?.username || "Anonymous" %>
+          </p>
           <p class="review-comment"><%= review.comment %></p>
           <p class="review-date">
             <%= review.created_at.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
           </p>
         </div>
-        <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="review-delete-form">
-          <button type="submit" class="delete-btn" aria-label="Delete review">&times;</button>
-        </form>
+
+        <% if(currentUser && review.owner && review.owner.equals(currentUser._id)) { %>
+            <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="review-delete-form">
+              <button type="submit" class="delete-btn" aria-label="Delete review">&times;</button>
+            </form>
+        <% } %>
       </div>
     <% }) %>
 
     <% if (listing.reviews.length === 0) { %>
       <p class="empty-state">No reviews yet — be the first to share your experience.</p>
     <% } %>
-  </div>
+</div>
+<hr>
+<div class="map-section">
+  <h3>Where you'll be</h3>
+  <div id="map">
+</div>
+</div>
 
+<script src="/js/map.js">
+
+</script>
 </section>
