@@ -4,7 +4,7 @@ const ExpressError = require("../utils/ExpressError.js"); // adjust path
 const geocodingClient = require("../utils/mapToken.js");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_TOKEN;
-const baseClient = mbxGeocoding({accessToken : mapToken})
+const baseClient = mbxGeocoding({accessToken :MAP_Token})
 
 module.exports.index = async (req,res)=>{
     let allListings = await Listing.find({}).sort({_id:-1});
