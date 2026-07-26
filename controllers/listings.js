@@ -3,8 +3,8 @@ const { listingSchema } = require("../schema.js"); // adjust path to wherever yo
 const ExpressError = require("../utils/ExpressError.js"); // adjust path
 const geocodingClient = require("../utils/mapToken.js");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
-const mapToken = process.env.MAP_TOKEN;
-const baseClient = mbxGeocoding({accessToken :MAP_Token})
+const MAP_TOKEN = process.env.MAP_TOKEN;
+const baseClient = mbxGeocoding({accessToken :MAP_TOKEN})
 
 module.exports.index = async (req,res)=>{
     let allListings = await Listing.find({}).sort({_id:-1});
